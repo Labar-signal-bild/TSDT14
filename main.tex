@@ -1,0 +1,114 @@
+\documentclass[a4paper,12pt]{article}
+
+\input{style}
+\title{TSDT14 - Rapport}
+\author{Alexander Poole \\ Anna Hjelmberg}
+
+
+%%Dokumentets början
+\begin{document}
+\maketitle
+	\thispagestyle{empty}
+\newpage
+
+%%TODO
+
+\section*{Introduction}
+
+The assignment for this report is to show our knowledge of bayesian networks. This is done by answearing theoretical questions about a given bayesian network. And also by expanding the given network with new nodes. In order to do this we have used a java program from AIspace specificlly developed for belif networks.
+
+\section*{Part 2:5}
+We have answeared the following questions.
+
+\subsection*{Question a} 
+What is the risk of melt-down in the power plant during a day if no observations have been made? What if there is icy weather?
+
+If no observation has been made there is $2.58\%$ chance of meltdown and if it's icy weather there is a $3.47\%$ chance of meldown.
+
+
+\subsection*{Question b} 
+Suppose that both warning sensors indicate failure. What is the risk of a meltdown in that case? Compare this result with the risk of a melt-down when there is an actual pump failure and water leak. What is the difference? The answers must be expressed as conditional probabilities of the observed variables, P(Meltdown|...).
+
+The diffrence is that PumpFailureWarning and WaterLeakWarning can be triggered even though there is no failure.
+
+P(meltdown|pumpFailWarning$\wedge$leakFailWarning)$=0.15=15\%$\\
+P(meltdown|pumpFail$\wedge$waterLeak)$=0.2=20\%$
+
+\subsection*{ Question c} 
+The conditional probabilities for the stochastic variables are often estimated by repeated experiments or observations. Why is it sometimes very difficult to get accurate numbers for these? What conditional probabilites in the model of the plant do you think are difficult or impossible to estimate?
+
+The reason why it's difficult to estimate sertain stochastic variables is that there is no good way to gather statistcs on how they function. One can easily do experiaments on pumFailure and PumpFailureWarnings but to actually test if they cause a meltdown is quite risky. Therfore sertain stochastic variables have to be estimated with very litle data. 
+
+\subsection*{Question d} Assume that the "IcyWeather" variable is changed to a more accurate "Temperature" variable instead (don't change your model). What are the different alternatives for the domain of this variable? What will happen with the probability distribution of P(WaterLeak | Temperature) in each alternative?
+
+If we were to use Temprature directly in our network we would have to make the variable discreate and finite. The domain for Temprature depends on how accurate (how small steps) we make it when we make it discreate togheter with were we make it finite. Depending on the step size in Temprature the distrubution of P(WaterLeak | Temperature) will vary in size.
+
+\section*{Part 2:6}
+\subsection*{Question a} 
+What does a probability table in a Bayesian network represent?
+
+A probability table represents the diffrent states and its probabilitys given the outcome of the variable's dependencies.
+
+\subsection*{Question b} 
+What is a joint probability distribution? Using the chain rule on the structure of the Bayesian network to rewrite the joint distribution as a product of P(child|parent) expressions, calculate manually the particular entry in the joint distribution of P(Meltdown=F, PumpFailureWarning=F, PumpFailure=F, WaterLeakWaring=F, WaterLeak=F, IcyWeather=F). Is this a common state for the nuclear plant to be in?
+
+See appendex A.
+
+\subsection*{Question c} 
+What is the probability of a meltdown if you know that there is both a water leak and a pump failure? Would knowing the state of any other variable matter? Explain your reasoning!
+
+P(meltdown|pumpFailure$\wedge$waterLeak)$=0.2=20\%$
+
+No, Meltdown only depends on PumpFailure and WaterLeak. So given that PumpFailure and WaterLeak are observed nothing els will change Meltdowns probability.
+
+\subsection*{Question d} 
+Calculate manually the probability of a meltdown when you happen to know that PumpFailureWarning=F, WaterLeak=F, WaterLeakWarning=F and IcyWeather=F but you are not really sure about a pump failure. 
+Hint: Use the Exact Inference formula near the end of the slides, or in sec. 14.4.1 in the book. This formula includes both conditioning on the variables you know (evidence) and marginalizing (summing) over the variable(s) you do not know (often called unobserved or hidden). You need to calculate this both for P(Meltdown=T|...) and P(Meltdown=F|..) and normalize them so that they sum to 1. This normalization factor is the alpha symbol in the equation. With this formula you could answer any query in the network, though it will be impractical for cases with many unobserved variables. A suggestion is to move the terms that do not involve the pump failure variable out of the sum over the two states pump failure can be in (T/F). You may use inference in the applet for verification purposes, but small differences is expected due to rounding errors.
+
+See appendex A.
+
+\section*{Part 3:2}
+The nuclear power plant but with an escape car have been used to answear the following questions.
+
+\subsection*{Question a}
+During the lunch break, the owner tries to show off for his employees by demonstrating the many features of his car stereo. To everyone's disappointment, it doesn't work. How did the owner's chances of surviving the day change after this observation? 
+
+From 0.99 -> 0.98.
+
+\subsection*{Question b}
+How does the bicycle change the owner's chances of survival? 
+
+From 0.99 -> 1.
+
+\subsection*{Question c}
+It is possible to model any function in propositional logic with Bayesian Networks. What does this fact say about the complexity of exact inference in Bayesian Networks? What alternatives are there to exact inference? 
+
+Yes, since we can create NAND-gates in propositional logic with Bayesian networks. Bayesian networks have a exponential complexity when modeling exact inference. An alternative would be approximate inference which has lower accuracy but better computing time.
+
+\section*{Part 4:2}
+
+\subsection*{Question a}
+The owner had an idea that instead of employing a safety person, to replace the pump with a better one. Is it possible, in your model, to compensate for the lack of Mr H.S.'s expertise with a better pump? 
+
+If Mr H.S were removed and an unbreakable pump was installed it would still be worse than haveing Mr H.S fixing warnings.
+
+\subsection*{Question c}
+What unrealistic assumptions do you make when creating a Bayesian Network model of a person? 
+
+If we look beyond the fact that we can't have unlimited states and unlimited possibilites in a Bayesian network and still tried to model a person. Then it all comes down to a philosofical problem, can we model a person perfectly given unlimited data and computational power. If you belive in a deterministic world then the answer is yes if you belive in free will then the answer is no.
+
+
+\subsection*{Question d}
+Describe how you would model a more dynamic world where for eample the "IcyWeather" is more likely to be true the next day if it was true the day before. You only have to consider a limited sequence of days.
+
+We can create a chain of days spaning the sequence of days of our model. The chain represents previous days and given that any of them have been observed to be icy they will increase the chanse that the given day that we are modeling the nuclear-power-plant on will icy.
+
+
+\subsection*{Question b}
+
+
+\section*{Appendex A}
+
+\end{document}
+
+
