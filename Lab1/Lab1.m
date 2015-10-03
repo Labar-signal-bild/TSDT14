@@ -8,93 +8,91 @@
 
 %% Filter
 
-% We have a curoff frequenci of pi/12.
-F = -10:0.01:10;
-Wn = 0.15;
+% We have a cutoff frequenci of pi/12.
+theta = 0:0.01:10;
+n = -100:2:100;
+thetac = 1/12;
+a = 0.778;
 
-[b1,a1]=butter(1,Wn);
-[b2,a2]=butter(100,Wn);
+b1 = 1-a;
+a1 = [1; -a]; 
+[b2,a2]=butter(20,2*thetac);
 
+H2 = 1/thetac*rectangularPulse(theta/thetac);
 
+Ry1 = 1/2*(abs((1-a)./(1-a*exp(-1i*2*pi*theta))).^2);
+ry1 = 1/2*(1-a)/(1+a).*a.^(abs(n));
 
-syms f t;
-
-Ry1 = 1/2*1/((2*pi*f)^2 + 1);
-ry1 = exp(-abs(t));
-
-Ry2 = 1/2*((F>-1/2)-(F>1/2));
-ry2 = 1/2*sinc(t);
+Ry2 = 1/2*(theta>=0)-1/2*(theta>=thetac)+1/2*(theta>=(1-thetac));
+ry2 = 1/2*2*thetac*sinc(2*thetac*n);
 
 figure(1);
-ezplot(Ry1);
-axis([-1 1 -1 1])
+plot(theta, Ry1);
+axis([0 1 0 0.6])
 title('PSD theoretical of first degree low pass filter');
-xlabel('Frequency [Hz]');
+xlabel('?');
 ylabel('Amplitude');
 
 
 figure(2)
-ezplot(ry1);
+stem(n, ry1);
+axis([-100 100 0 0.07])
 title('ACF theoretical of first degree low pass filter');
-xlabel('Time [s]');
+xlabel('n');
 ylabel('Amplitud');
-
+ 
 figure(3)
-plot(F,Ry2);
-axis([-1 1 -1 1])
+plot(theta,Ry2);
+axis([0 1 -0.01 0.6])
 title('PSD theoretical of ideal low pass filter');
-xlabel('Frequency [Hz]');
+xlabel('?');
 ylabel('Amplitud');
 
 figure(4)
-ezplot(ry2);
-axis([-5 5 -1 1])
+stem(n, ry2);
+axis([-30 30 -0.04 0.1])
 title('ACF theoretical of ideal low pass filter');
-xlabel('Time [s]');
+xlabel('n');
 ylabel('Amplitud');
 
 %% Bartletts 
 
-N = 20;
-n = -10:0.1:10;
+N = 8000;
 
 x=randn(N,1);
-h1 = exp(-n).*(n>0);
-h2 = (n>-1/2)-(n>1/2);
 
-yh1 = conv(h1, x);
-ACFh1 = zeros(1,2*N-1);
+h2 = ifft(H2);
 
-i1 = find(yh1,1,'first');
-i2 = find(yh1,2, 'last');
-yh11=yh1(i1:i2);
+y2 = real(conv(x, h2));
 
-yh2 = conv(h2, x);
-ACFh2 = zeros(1,2*N-1);
+y1 = filter(a1,b1,x);
+ACF1 = zeros(1,N);
 
-i1 = find(yh2,1,'first');
-i2 = find(yh2,2, 'last');
-yh22=yh2(i1:i2);
+%y2 = filter(a2,b2,x);
+ACF2 = zeros(1,N);
 
-for k = -N+1:N-1
-    for n = 0:(N-abs(k)-1)
-      ACFh1(k+N) = ACFh1(k+N)+1/N*yh11(n+1)*yh11(n+abs(k)+1);
-      ACFh2(k+N) = ACFh2(k+N)+1/N*yh22(n+1)*yh22(n+abs(k)+1);
+for k = -N/2+1:N/2-1
+    for n = 1:(N-abs(k))
+      ACF1(k+N/2) = ACF1(k+N/2)+y1(n)*y1(n+abs(k));
+      ACF2(k+N/2) = ACF2(k+N/2)+y2(n)*y2(n+abs(k));
     end
 end
 
-ACFMax1=max(ACFh1);
-ACFMax2=max(ACFh2);
-        
+ACF1=ACF1./N;
+ACF2=ACF2./N;
+ACFMax1=max(ACF1);
+ACFMax2=max(ACF2);
+
 figure(5)
-plot([-k:k],ACFh1);
-axis([-k k -ACFMax1*1.5 ACFMax1*1.5])
+plot([-k:k+1],ACF1);
+axis([-k k+1 -ACFMax1*1.5 ACFMax1*1.5])
+%axis([-30 30 -0.04 0.1])
 title('ACF estimate of first degre low pass filter');
 xlabel('k');
 ylabel('Amplitud');
 
 figure(6)
-plot([-k:k],ACFh2);
+plot([-k:k+1],ACF2);
 axis([-k k -ACFMax2*1.5 ACFMax2*1.5])
 title('ACF estimate of ideal low pass filter');
 xlabel('k');
@@ -103,8 +101,8 @@ ylabel('Amplitud');
 
 %% Fourier transform of ACF
 
-PSD1 = fft(ACFh1);
-PSD2 = fft(ACFh2);
+PSD1 = fft(ACF1);
+PSD2 = fft(ACF2);
 
 PSDMax1=max(abs(PSD1));
 PSDMax2=max(abs(PSD2));
