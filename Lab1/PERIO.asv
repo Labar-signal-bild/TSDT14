@@ -1,0 +1,26 @@
+function PSD = PERIO( y,k )
+%PERIO calculates the periodogram esstimate of a PSD
+
+NmbrSamples = length(y)
+SamplesPerK = NmbrSamples/k
+
+
+yP=zeros(5*SamplesPerK,1);
+
+length(yP);
+
+PSD = zeros(5*NmbrSamples-1,1);
+
+lengt
+for i=1:k
+    yP(2*SamplesPerK+1:3*SamplesPerK) = y(SamplesPerK*(i-1)+1:SamplesPerK*i);
+    yPInv = inverter(yP);
+    yConv = 1/k*conv(yPInv,yP);
+    Ry = fft(yConv);
+    PSD = PSD + Ry;
+    
+end
+
+PSD = PSD./k;
+
+end

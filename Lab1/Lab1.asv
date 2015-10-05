@@ -130,7 +130,7 @@ ylabel('Amplitud');
 
 %% Averaged Periodograms
 
-k = 20; %Antal segment som vi delar upp ACFen på.
+k = 200; %Antal segment som vi delar upp ACFen på.
 
 %
 % Calculating Periodograms
