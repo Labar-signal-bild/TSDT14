@@ -15,7 +15,7 @@ thetac = 1/12;
 a = 0.778;
 
 b1 = 1-a;
-a1 = [1; -a]; 
+a1 = [1; -a];
 [b2,a2]=butter(20,2*thetac);
 
 H2 = 1/thetac*rectangularPulse(theta/thetac);
@@ -63,12 +63,10 @@ x=randn(N,1);
 
 h2 = ifft(H2);
 
-y2 = real(conv(x, h2));
-
-y1 = filter(a1,b1,x);
+y1 = filter(b1,a1,x);
 ACF1 = zeros(1,N);
 
-%y2 = filter(a2,b2,x);
+y2 = filter(b2,a2,x);
 ACF2 = zeros(1,N);
 
 for k = -N/2+1:N/2-1
@@ -108,16 +106,55 @@ PSDMax1=max(abs(PSD1));
 PSDMax2=max(abs(PSD2));
 
 figure(7)
-plot([-k:k],abs(PSD1));
-axis([-k k 0 PSDMax1*1.5])
+plot([-k:k+1],abs(PSD1));
+axis([-k k+1 0 PSDMax1*1.5])
 title('PSD estimate of first degre low pass filter');
 xlabel('k');
 ylabel('Amplitud');
 
 
 figure(8)
-plot([-k:k],abs(PSD2));
+plot([-k:k+1],abs(PSD2));
 axis([-k k 0 PSDMax2*1.5])
 title('PSD estimate of ideal low pass filter');
 xlabel('k');
 ylabel('Amplitud');
+
+%% Averaged Periodograms
+
+k = 200; %Antal segment som vi delar upp ACFen på.
+
+yN1=zeros(5*N/k,1);
+yN2=zeros(5*N/k,1);
+PSDAv1=zeros(N/2-1,1);
+PSDAv2=zeros(N/2-1,1);
+
+for i=1:k
+yN1(2*N/k+1:3*N/k)=y1(N/k*(i-1)+1:(N/k)*i);
+yN1Inv = inverter(yN1);
+yN1conv = k/N*conv(yN1,yN1Inv); 
+
+PSDAv1=PSDAv1+fft(yN1conv);
+
+yN2(2*N/k+1:3*N/k)=y2(N/k*(i-1)+1:(N/k)*i);
+yN2Inv = inverter(yN2);
+yN2conv = k/N*conv(yN2,yN2Inv); 
+
+PSDAv2=PSDAv2+fft(yN2conv);
+
+end
+
+PSDAv1 = PSDAv1/k;
+PSDAv1Max1=max(abs(PSDAv1));
+
+PSDAv2 = PSDAv2/k;
+PSDAv2Max2=max(abs(PSDAv2));
+
+figure(9)
+plot([-N/4:N/4-2],abs(PSDAv1)); axis([-N/k N/k -PSDAv1Max1*1.5 PSDAv1Max1*1.5]); title('PSD averaging first degree low pass filter'); xlabel('k');ylabel('Amplitud');
+
+figure(10)
+plot([-N/4:N/4-2],abs(PSDAv2));axis([-N/k N/k -PSDAv2Max2*1.5 PSDAv2Max2*1.5]);title('PSD averaging high degree low pass filter');xlabel('k');ylabel('Amplitud');
+
+%% 
+
