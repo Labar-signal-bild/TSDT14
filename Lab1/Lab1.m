@@ -162,7 +162,6 @@ PSDAv2Max2=max(abs(PSDAv2));
 ACFAv1Max1=max(abs(ACFAv1));
 ACFAv2Max2=max(abs(ACFAv2));
 
-
 %
 % Plottar
 %
