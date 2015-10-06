@@ -196,27 +196,147 @@ ylabel('Amplitud');
 
 %% Smoothing 
 
-n = length(y1);
-
-
 %
 % Plot Windows
 %
 
-
+%ACF1Smooth = Smoothing(ACF1,'plot');
 
 %
 % ACF Smoothing
 %
 
-ACF1Smooth = Smoothing(ACF1,'bajs');
+ACF1Ham = Smoothing(ACF1,'hamming');
+ACF1Han = Smoothing(ACF1,'hanning');
+ACF1Bla = Smoothing(ACF1,'blackman');
+ACF1Box = Smoothing(ACF1,'boxcar');
+
+ACF2Ham = Smoothing(ACF2,'hamming');
+ACF2Han = Smoothing(ACF2,'hanning');
+ACF2Bla = Smoothing(ACF2,'blackman');
+ACF2Box = Smoothing(ACF2,'boxcar');
 
 %
 % PSD Smoothing
 %
 
-%
-% Axis
-%
+PSD1Ham = fft(ACF1Ham);
+PSD1Han = fft(ACF1Han);
+PSD1Bla = fft(ACF1Bla);
+PSD1Box = fft(ACF1Box);
+
+PSD2Ham = fft(ACF2Ham);
+PSD2Han = fft(ACF2Han);
+PSD2Bla = fft(ACF2Bla);
+PSD2Box = fft(ACF2Box);
+
+%% Axises
+
+thetaVector = 0:1/(length(PSD2Ham)-1):1;
+sampleVector = 
 
 
+%% Hamming plots
+
+figure(17)
+plot(thetaVector,abs(PSDAv2));
+axis([0 1 -PSDAv2Max2*1.5 PSDAv2Max2*1.5]);
+title('PSD averaging high degree low pass filter');
+xlabel('theta');
+ylabel('Amplitud');
+
+figure(18)
+plot(sampleVector,abs(ACFAv1)); 
+axis([-500 500 -ACFAv1Max1*1.5 ACFAv1Max1*1.5]); 
+title('ACF averaging first degree low pass filter'); 
+xlabel('k');
+ylabel('Amplitud');
+
+figure(19)
+plot(thetaVector,abs(PSDAv2));
+axis([0 1 -PSDAv2Max2*1.5 PSDAv2Max2*1.5]);
+title('PSD averaging high degree low pass filter');
+xlabel('theta');
+ylabel('Amplitud');
+
+figure(20)
+plot(sampleVector,abs(ACFAv1)); 
+axis([-500 500 -ACFAv1Max1*1.5 ACFAv1Max1*1.5]); 
+title('ACF averaging first degree low pass filter'); 
+xlabel('k');
+ylabel('Amplitud');
+
+%% Hanning plots
+
+figure(21)
+plot(thetaVector,abs(PSDAv2));
+axis([0 1 -PSDAv2Max2*1.5 PSDAv2Max2*1.5]);
+title('PSD averaging high degree low pass filter');
+xlabel('theta');
+ylabel('Amplitud');
+
+figure(22)
+plot(sampleVector,abs(ACFAv1)); 
+axis([-500 500 -ACFAv1Max1*1.5 ACFAv1Max1*1.5]); 
+title('ACF averaging first degree low pass filter'); 
+xlabel('k');
+ylabel('Amplitud');
+
+figure(23)
+plot(thetaVector,abs(PSDAv2));
+axis([0 1 -PSDAv2Max2*1.5 PSDAv2Max2*1.5]);
+title('PSD averaging high degree low pass filter');
+xlabel('theta');
+ylabel('Amplitud');
+
+figure(24)
+plot(sampleVector,abs(ACFAv1)); 
+axis([-500 500 -ACFAv1Max1*1.5 ACFAv1Max1*1.5]); 
+title('ACF averaging first degree low pass filter'); 
+xlabel('k');
+ylabel('Amplitud');
+
+%% Blackman plots
+
+figure(25)
+plot(thetaVector,abs(PSDAv2));
+axis([0 1 -PSDAv2Max2*1.5 PSDAv2Max2*1.5]);
+title('PSD averaging high degree low pass filter');
+xlabel('theta');
+ylabel('Amplitud');
+
+figure(26)
+plot(sampleVector,abs(ACFAv1)); 
+axis([-500 500 -ACFAv1Max1*1.5 ACFAv1Max1*1.5]); 
+title('ACF averaging first degree low pass filter'); 
+xlabel('k');
+ylabel('Amplitud');
+
+%% Boxcar plots
+figure(27)
+plot(thetaVector,abs(PSDAv2));
+axis([0 1 -PSDAv2Max2*1.5 PSDAv2Max2*1.5]);
+title('PSD averaging high degree low pass filter');
+xlabel('theta');
+ylabel('Amplitud');
+
+figure(28)
+plot(sampleVector,abs(ACFAv1)); 
+axis([-500 500 -ACFAv1Max1*1.5 ACFAv1Max1*1.5]); 
+title('ACF averaging first degree low pass filter'); 
+xlabel('k');
+ylabel('Amplitud');
+
+figure(29)
+plot(thetaVector,abs(PSDAv2));
+axis([0 1 -PSDAv2Max2*1.5 PSDAv2Max2*1.5]);
+title('PSD averaging high degree low pass filter');
+xlabel('theta');
+ylabel('Amplitud');
+
+figure(30)
+plot(sampleVector,abs(ACFAv1)); 
+axis([-500 500 -ACFAv1Max1*1.5 ACFAv1Max1*1.5]); 
+title('ACF averaging first degree low pass filter'); 
+xlabel('k');
+ylabel('Amplitud');
