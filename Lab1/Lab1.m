@@ -53,7 +53,7 @@ ylabel('Amplitud');
 
 %% Bartletts 
 
-NmbrSamples = 10000; % Signal length
+NmbrSamples = 1000; % Signal length
 kVector     = [-NmbrSamples/2+1/2:NmbrSamples/2-1/2];
 thetaVector = [0:1/(NmbrSamples-1):1];
 x=randn(NmbrSamples,1); % White noise
@@ -194,5 +194,29 @@ title('ACF averaging high degree low pass filter');
 xlabel('k');
 ylabel('Amplitud');
 
-%% 
+%% Smoothing 
+
+n = length(y1);
+
+
+%
+% Plot Windows
+%
+
+
+
+%
+% ACF Smoothing
+%
+
+ACF1Smooth = Smoothing(ACF1,'bajs');
+
+%
+% PSD Smoothing
+%
+
+%
+% Axis
+%
+
 
