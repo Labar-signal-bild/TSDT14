@@ -53,7 +53,7 @@ ylabel('Amplitud');
 
 %% Bartletts 
 
-NmbrSamples = 1000; % Signal length
+NmbrSamples = 20; % Signal length
 kVector     = [-NmbrSamples/2+1/2:NmbrSamples/2-1/2];
 thetaVector = [0:1/(NmbrSamples-1):1];
 x=randn(NmbrSamples,1); % White noise
@@ -89,6 +89,12 @@ ACFMax2=max(ACF2);
 %
 % ACF estimate plots
 %
+
+kVector     = [-NmbrSamples/2+1/2:NmbrSamples/2-1/2];
+thetaVector = [0:1/(NmbrSamples-1):1];
+
+ACFMax1=max(ACF1);
+ACFMax2=max(ACF2);
 
 figure(5)
 plot(kVector,ACF1);
@@ -232,111 +238,166 @@ PSD2Box = fft(ACF2Box);
 
 %% Axises
 
-thetaVector = 0:1/(length(PSD2Ham)-1):1;
-sampleVector = 
-
+NmbrSamples = length(ACF1);
+kVector     = [-NmbrSamples/2+1/2:NmbrSamples/2-1/2];
+thetaVector = [0:1/(NmbrSamples-1):1];
 
 %% Hamming plots
 
+ACFMax1=max(ACF1Ham);
+ACFMax2=max(ACF2Ham);
+
 figure(17)
-plot(thetaVector,abs(PSDAv2));
-axis([0 1 -PSDAv2Max2*1.5 PSDAv2Max2*1.5]);
-title('PSD averaging high degree low pass filter');
-xlabel('theta');
+plot(kVector,ACF1Ham);
+axis([min(kVector) max(kVector) -ACFMax1*1.5 ACFMax1*1.5])
+title('ACF estimate of first degre low pass filter');
+xlabel('k');
 ylabel('Amplitud');
 
 figure(18)
-plot(sampleVector,abs(ACFAv1)); 
-axis([-500 500 -ACFAv1Max1*1.5 ACFAv1Max1*1.5]); 
-title('ACF averaging first degree low pass filter'); 
+plot(kVector,ACF2Ham);
+axis([min(kVector) max(kVector) -ACFMax2*1.5 ACFMax2*1.5])
+title('ACF estimate of ideal low pass filter');
 xlabel('k');
 ylabel('Amplitud');
 
+
+% PSD
+
+PSDMax1=max(abs(PSD1Ham));
+PSDMax2=max(abs(PSD2Ham));
+
 figure(19)
-plot(thetaVector,abs(PSDAv2));
-axis([0 1 -PSDAv2Max2*1.5 PSDAv2Max2*1.5]);
-title('PSD averaging high degree low pass filter');
+plot(thetaVector,abs(PSD1Ham));
+axis([min(thetaVector) max(thetaVector) -PSDMax1*1.5 PSDMax1*1.5])
+title('PSD estimate of first degre low pass filter');
 xlabel('theta');
 ylabel('Amplitud');
 
+
 figure(20)
-plot(sampleVector,abs(ACFAv1)); 
-axis([-500 500 -ACFAv1Max1*1.5 ACFAv1Max1*1.5]); 
-title('ACF averaging first degree low pass filter'); 
-xlabel('k');
+plot(thetaVector,abs(PSD2Ham));
+axis([min(thetaVector) max(thetaVector) -PSDMax2*1.5 PSDMax2*1.5])
+title('PSD estimate of ideal low pass filter');
+xlabel('theta');
 ylabel('Amplitud');
 
 %% Hanning plots
 
+ACFMax1=max(ACF1Han);
+ACFMax2=max(ACF2Han);
+
 figure(21)
-plot(thetaVector,abs(PSDAv2));
-axis([0 1 -PSDAv2Max2*1.5 PSDAv2Max2*1.5]);
-title('PSD averaging high degree low pass filter');
-xlabel('theta');
+plot(kVector,ACF1Han);
+axis([min(kVector) max(kVector) -ACFMax1*1.5 ACFMax1*1.5])
+title('ACF estimate of first degre low pass filter');
+xlabel('k');
 ylabel('Amplitud');
 
 figure(22)
-plot(sampleVector,abs(ACFAv1)); 
-axis([-500 500 -ACFAv1Max1*1.5 ACFAv1Max1*1.5]); 
-title('ACF averaging first degree low pass filter'); 
+plot(kVector,ACF2Han);
+axis([min(kVector) max(kVector) -ACFMax2*1.5 ACFMax2*1.5])
+title('ACF estimate of ideal low pass filter');
 xlabel('k');
 ylabel('Amplitud');
 
+
+% PSD
+
+PSDMax1=max(abs(PSD1Han));
+PSDMax2=max(abs(PSD2Han));
+
 figure(23)
-plot(thetaVector,abs(PSDAv2));
-axis([0 1 -PSDAv2Max2*1.5 PSDAv2Max2*1.5]);
-title('PSD averaging high degree low pass filter');
+plot(thetaVector,abs(PSD1Han));
+axis([min(thetaVector) max(thetaVector) -PSDMax1*1.5 PSDMax1*1.5])
+title('PSD estimate of first degre low pass filter');
 xlabel('theta');
 ylabel('Amplitud');
 
+
 figure(24)
-plot(sampleVector,abs(ACFAv1)); 
-axis([-500 500 -ACFAv1Max1*1.5 ACFAv1Max1*1.5]); 
-title('ACF averaging first degree low pass filter'); 
-xlabel('k');
+plot(thetaVector,abs(PSD2Han));
+axis([min(thetaVector) max(thetaVector) -PSDMax2*1.5 PSDMax2*1.5])
+title('PSD estimate of ideal low pass filter');
+xlabel('theta');
 ylabel('Amplitud');
 
 %% Blackman plots
 
+ACFMax1=max(ACF1Bla);
+ACFMax2=max(ACF2Bla);
+
 figure(25)
-plot(thetaVector,abs(PSDAv2));
-axis([0 1 -PSDAv2Max2*1.5 PSDAv2Max2*1.5]);
-title('PSD averaging high degree low pass filter');
-xlabel('theta');
+plot(kVector,ACF1Bla);
+axis([min(kVector) max(kVector) -ACFMax1*1.5 ACFMax1*1.5])
+title('ACF estimate of first degre low pass filter');
+xlabel('k');
 ylabel('Amplitud');
 
 figure(26)
-plot(sampleVector,abs(ACFAv1)); 
-axis([-500 500 -ACFAv1Max1*1.5 ACFAv1Max1*1.5]); 
-title('ACF averaging first degree low pass filter'); 
+plot(kVector,ACF2Bla);
+axis([min(kVector) max(kVector) -ACFMax2*1.5 ACFMax2*1.5])
+title('ACF estimate of ideal low pass filter');
 xlabel('k');
+ylabel('Amplitud');
+
+
+% PSD
+
+PSDMax1=max(abs(PSD1Bla));
+PSDMax2=max(abs(PSD2Bla));
+
+figure(27)
+plot(thetaVector,abs(PSD1Bla));
+axis([min(thetaVector) max(thetaVector) -PSDMax1*1.5 PSDMax1*1.5])
+title('PSD estimate of first degre low pass filter');
+xlabel('theta');
+ylabel('Amplitud');
+
+
+figure(28)
+plot(thetaVector,abs(PSD2Bla));
+axis([min(thetaVector) max(thetaVector) -PSDMax2*1.5 PSDMax2*1.5])
+title('PSD estimate of ideal low pass filter');
+xlabel('theta');
 ylabel('Amplitud');
 
 %% Boxcar plots
-figure(27)
-plot(thetaVector,abs(PSDAv2));
-axis([0 1 -PSDAv2Max2*1.5 PSDAv2Max2*1.5]);
-title('PSD averaging high degree low pass filter');
-xlabel('theta');
-ylabel('Amplitud');
 
-figure(28)
-plot(sampleVector,abs(ACFAv1)); 
-axis([-500 500 -ACFAv1Max1*1.5 ACFAv1Max1*1.5]); 
-title('ACF averaging first degree low pass filter'); 
-xlabel('k');
-ylabel('Amplitud');
+ACFMax1=max(ACF1Box);
+ACFMax2=max(ACF2Box);
 
 figure(29)
-plot(thetaVector,abs(PSDAv2));
-axis([0 1 -PSDAv2Max2*1.5 PSDAv2Max2*1.5]);
-title('PSD averaging high degree low pass filter');
-xlabel('theta');
+plot(kVector,ACF1Box);
+axis([min(kVector) max(kVector) -ACFMax1*1.5 ACFMax1*1.5])
+title('ACF estimate of first degre low pass filter');
+xlabel('k');
 ylabel('Amplitud');
 
 figure(30)
-plot(sampleVector,abs(ACFAv1)); 
-axis([-500 500 -ACFAv1Max1*1.5 ACFAv1Max1*1.5]); 
-title('ACF averaging first degree low pass filter'); 
+plot(kVector,ACF2Box);
+axis([min(kVector) max(kVector) -ACFMax2*1.5 ACFMax2*1.5])
+title('ACF estimate of ideal low pass filter');
 xlabel('k');
+ylabel('Amplitud');
+
+
+% PSD
+
+PSDMax1=max(abs(PSD1Box));
+PSDMax2=max(abs(PSD2Box));
+
+figure(31)
+plot(thetaVector,abs(PSD1Box));
+axis([min(thetaVector) max(thetaVector) -PSDMax1*1.5 PSDMax1*1.5])
+title('PSD estimate of first degre low pass filter');
+xlabel('theta');
+ylabel('Amplitud');
+
+
+figure(32)
+plot(thetaVector,abs(PSD2Box));
+axis([min(thetaVector) max(thetaVector) -PSDMax2*1.5 PSDMax2*1.5])
+title('PSD estimate of ideal low pass filter');
+xlabel('theta');
 ylabel('Amplitud');
