@@ -6,67 +6,71 @@
 % Räkna ut Ry1 och Ry2 med de nya tids discretra filterna
 % 
 
+cd      /edu/alepo020/skola/TSKS14/Rapport/bilder/Lab1
+addpath /edu/alepo020/skola/TSKS14/Lab1
+
 %% Filter
 
 % We have a cutoff frequenci of pi/12.
-theta = 0:0.01:10;
+theta = 0:0.001:10;
 n = -100:2:100;
 thetac = 1/12;
-a = 0.778;
 
-H2 = 1/thetac*rectangularPulse(theta/thetac);
+[b1,a1]=butter(1,2*thetac);
 
-Ry1 = 1/2*(abs((1-a)./(1-a*exp(-1i*2*pi*theta))).^2);
+a = 0.78;
+
+
+Ry1 = 1/2*(abs((b1(1)+b1(2)*exp(-1i*2*pi*theta))./(1+a1(2)*exp(-1i*2*pi*theta))).^2);
 ry1 = 1/2*(1-a)/(1+a).*a.^(abs(n));
 
 Ry2 = 1/2*(theta>=0)-1/2*(theta>=thetac)+1/2*(theta>=(1-thetac));
 ry2 = 1/2*2*thetac*sinc(2*thetac*n);
 
 figure(1);
+subplot(2,1,1)
 plot(theta, Ry1);
-axis([0 1 0 0.6])
-title('PSD theoretical of first degree low pass filter');
-xlabel('?');
-ylabel('Amplitude');
+axis([0 1 0 0.55])
+title('PSD');
+xlabel('\theta');
 
-
-figure(2)
+subplot(2,1,2)
 stem(n, ry1);
-axis([-100 100 0 0.07])
-title('ACF theoretical of first degree low pass filter');
+axis([-40 40 0 0.07])
+title('ACF');
 xlabel('n');
-ylabel('Amplitud');
  
-figure(3)
+figure(2)
+subplot(2,1,1)
 plot(theta,Ry2);
-axis([0 1 -0.01 0.6])
-title('PSD theoretical of ideal low pass filter');
-xlabel('?');
-ylabel('Amplitud');
+axis([0 1 -0.01 0.55])
+title('PSD');
+xlabel('\theta');
 
-figure(4)
+subplot(2,1,2)
 stem(n, ry2);
-axis([-30 30 -0.04 0.1])
-title('ACF theoretical of ideal low pass filter');
+axis([-40 40 -0.04 0.1])
+title('ACF');
 xlabel('n');
-ylabel('Amplitud');
+
+saveas(1,'Lab1fig1.svg');
+saveas(2,'Lab1fig2.svg');
 
 %% Bartletts 
 
-NmbrSamples = 20; % Signal length
+NmbrSamples = 20000; % Signal length
 kVector     = [-NmbrSamples/2+1/2:NmbrSamples/2-1/2];
 thetaVector = [0:1/(NmbrSamples-1):1];
-x=randn(NmbrSamples,1); % White noise
+x=1/2*randn(NmbrSamples,1); % White noise
 
 %
 % Filter koeficients
 %
 
 thetac = 1/12;
-a = 0.778;
 
-b1 = 1-a;
-a1 = [1; -a];
+
+[b1,a1]=butter(1,2*thetac);
 [b2,a2]=butter(20,2*thetac);
 
 %
@@ -134,6 +138,11 @@ title('PSD estimate of ideal low pass filter');
 xlabel('theta');
 ylabel('Amplitud');
 
+%saveas(5,'Lab1fig5.svg');
+%saveas(6,'Lab1fig6.svg');
+%saveas(7,'Lab1fig7.svg');
+%saveas(8,'Lab1fig8.svg');
+
 %% Averaged Periodograms
 
 k = 20; %Antal segment som vi delar upp ACFen p�.
@@ -199,6 +208,11 @@ axis([-500 500 -ACFAv2Max2*1.5 ACFAv2Max2*1.5]);
 title('ACF averaging high degree low pass filter');
 xlabel('k');
 ylabel('Amplitud');
+
+saveas(9,'Lab1fig9.svg');
+saveas(10,'Lab1fig10.svg');
+saveas(11,'Lab1fig11.svg');
+saveas(12,'Lab1fig12.svg');
 
 %% Smoothing 
 
@@ -282,6 +296,11 @@ title('PSD estimate of ideal low pass filter');
 xlabel('theta');
 ylabel('Amplitud');
 
+saveas(17,'Lab1fig17.svg');
+saveas(18,'Lab1fig18.svg');
+saveas(19,'Lab1fig19.svg');
+saveas(20,'Lab1fig20.svg');
+
 %% Hanning plots
 
 ACFMax1=max(ACF1Han);
@@ -321,6 +340,11 @@ axis([min(thetaVector) max(thetaVector) -PSDMax2*1.5 PSDMax2*1.5])
 title('PSD estimate of ideal low pass filter');
 xlabel('theta');
 ylabel('Amplitud');
+
+saveas(21,'Lab1fig21.svg');
+saveas(22,'Lab1fig22.svg');
+saveas(23,'Lab1fig23.svg');
+saveas(24,'Lab1fig24.svg');
 
 %% Blackman plots
 
@@ -362,6 +386,11 @@ title('PSD estimate of ideal low pass filter');
 xlabel('theta');
 ylabel('Amplitud');
 
+saveas(25,'Lab1fig25.svg');
+saveas(26,'Lab1fig26.svg');
+saveas(27,'Lab1fig27.svg');
+saveas(28,'Lab1fig28.svg');
+
 %% Boxcar plots
 
 ACFMax1=max(ACF1Box);
@@ -401,3 +430,8 @@ axis([min(thetaVector) max(thetaVector) -PSDMax2*1.5 PSDMax2*1.5])
 title('PSD estimate of ideal low pass filter');
 xlabel('theta');
 ylabel('Amplitud');
+
+saveas(29,'Lab1fig29.svg');
+saveas(30,'Lab1fig30.svg');
+saveas(31,'Lab1fig31.svg');
+saveas(32,'Lab1fig32.svg');
