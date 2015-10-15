@@ -59,23 +59,56 @@ xlabel('?');
 %% Histograms
 
 
-NmbrSamples = 20000; % Signal length
+NmbrSamples = 20001; % Signal length
 n = -100:2:100;
 w = 1/2*randn(NmbrSamples,1); % White noise
 [b2,a2]=butter(20,2*theta0); % Create butterworth filter parameters
 x = filter(b2,a2,w); %Filter our noise throuh the filter. x is our in signal
-
+kVectorH    = [-floor(NmbrSamples/2):floor(NmbrSamples/2)];
 % SQUARER
-y = x.^2;
-
-histo = hist(y);
+ySquarer = x.^2;
 
 
 figure(4);
-histogram(histo, 'BinMethod', 'auto');
+histogram(ySquarer);
 %axis([0 4 0 10])
-title('Theoretical PSD of the AM');
-xlabel('');
+title('Histogram of the output of the squarer');
+xlabel('n');
+
+figure(11);
+plot(kVectorH, ySquarer)
+axis([-10^4 10^4 -1.5 1.5]) %Ser ut som jag vill
+
+%Half-Wave
+NmbrSamples = 2001;
+%yHalfWave = x(ceil(NmbrSamples/2)+1:NmbrSamples);
+yHalfWave = x*(1-(kVectorH<0));
+
+figure(10);
+plot(yHalfWave)
+axis([-10^4 10^4 -1.5 1.5]) %Ser ut som jag vill
+
+figure(5);
+histogram(yHalfWave);
+%axis([0 4 0 10])
+title('Histogram of the output of the Half-wave rectifier');
+xlabel('n');
+
+% AM modulator
+NmbrSamples = 20001;
+yAM = x*cos(ohm0*n);
+
+figure(12);
+plot(yAM)
+axis([-10^4 10^4 -1.5 1.5])
+
+figure(6);
+histogram(yAM, 150);
+title('Histogram of the output of the AM-SC modulater');
+xlabel('n');
+
+
+
 
 
 
