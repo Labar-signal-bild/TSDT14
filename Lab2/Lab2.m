@@ -96,19 +96,17 @@ title('Histogram');
 xlabel('n');
 
 %--------------- Half-Wave --------------------
-NmbrSamples = 201; % Signal length
-n = -100:2:100;
-w = 1/2*randn(NmbrSamples,1); % White noise
-[b2,a2]=butter(20,2*theta0); % Create butterworth filter parameters
-x = filter(b2,a2,w); %Filter our noise throuh the filter. x is our in signal
-kVectorH    = [-floor(NmbrSamples/2):floor(NmbrSamples/2)];
 
 
-yHalfWave = x*(1-(kVectorH<0));
+
+%yHalfWave1 = x.*(1-(kVectorH<0))
+yHalfWave = [zeros(ceil(NmbrSamples/2),1); x(ceil(NmbrSamples/2)+1:NmbrSamples)]
+
 
 % Histogram of outsignal from half-wave
 figure(5);
 histogram(yHalfWave);
+axis([-1 1 0 12000])
 title('Histogram');
 xlabel('n');
 
