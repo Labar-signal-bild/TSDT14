@@ -1,3 +1,8 @@
+cd      /edu/annhj876/Skola/TSKS14/Rapport/bilder/Lab2
+addpath /edu/annhj876/Skola/TSKS14/Lab2
+
+
+
 theta = 0:0.01:1;
 theta0 = 0.15;
 ohm0 = pi/2;
@@ -17,10 +22,10 @@ RySquarer = N0^2*theta0*triangularPulse((theta-1)/(2*theta0)) + ...
 
 
 
-
+% Theoretical PSD of squarer
 figure(1);
 plot(theta, RySquarer);
-title('Theoretical PSD of the squarer');
+title('PSD');
 xlabel('?');
 %ylabel('Amplitude');
 
@@ -34,10 +39,10 @@ triwave = N0/(8*pi)*triangularPulse(theta/(2*theta0)) + ...
 
 RyHalfWave = diracwave + rectwave + triwave;
 
-
+% Theoretical PSD of half-wave rectifier
 figure(2);
 plot(theta, RyHalfWave);
-title('Theoretical PSD of the half wave');
+title('PSD');
 xlabel('?');
 
 
@@ -46,9 +51,10 @@ RyAM = N0/8*rectangularPulse((theta+ohm0/(2*pi))/(2*theta0)) + ...
     N0/8*rectangularPulse((theta-ohm0/(2*pi))/(2*theta0)) + ...
     N0/8*rectangularPulse((theta-1-ohm0/(2*pi))/(2*theta0));
 
+% Theoretical PSD of AM-SC modulation
 figure(3);
 plot(theta, RyAM);
-title('Theoretical PSD of the AM');
+title('PSD');
 xlabel('?');
 
 
@@ -65,52 +71,54 @@ w = 1/2*randn(NmbrSamples,1); % White noise
 [b2,a2]=butter(20,2*theta0); % Create butterworth filter parameters
 x = filter(b2,a2,w); %Filter our noise throuh the filter. x is our in signal
 kVectorH    = [-floor(NmbrSamples/2):floor(NmbrSamples/2)];
-% SQUARER
+
+
+
+%--------------- SQUARER -------------------
 ySquarer = x.^2;
 
-
+% Histogram of outsignal from squarer
 figure(4);
 histogram(ySquarer);
-%axis([0 4 0 10])
-title('Histogram of the output of the squarer');
+title('Histogram');
 xlabel('n');
 
-figure(11);
-plot(kVectorH, ySquarer)
-axis([-10^4 10^4 -1.5 1.5]) %Ser ut som jag vill
 
-%Half-Wave
-NmbrSamples = 2001;
-%yHalfWave = x(ceil(NmbrSamples/2)+1:NmbrSamples);
-yHalfWave = x*(1-(kVectorH<0));
 
-figure(10);
-plot(yHalfWave)
-axis([-10^4 10^4 -1.5 1.5]) %Ser ut som jag vill
+% -------------------- AM modulator -------------------
 
-figure(5);
-histogram(yHalfWave);
-%axis([0 4 0 10])
-title('Histogram of the output of the Half-wave rectifier');
-xlabel('n');
-
-% AM modulator
-NmbrSamples = 20001;
 yAM = x*cos(ohm0*n);
 
-figure(12);
-plot(yAM)
-axis([-10^4 10^4 -1.5 1.5])
-
+% Histogram of outsignal from AM modulator
 figure(6);
 histogram(yAM, 150);
-title('Histogram of the output of the AM-SC modulater');
+title('Histogram');
+xlabel('n');
+
+%--------------- Half-Wave --------------------
+
+
+
+%yHalfWave1 = x.*(1-(kVectorH<0))
+yHalfWave = [zeros(ceil(NmbrSamples/2),1); x(ceil(NmbrSamples/2)+1:NmbrSamples)]
+
+
+% Histogram of outsignal from half-wave
+figure(5);
+histogram(yHalfWave);
+axis([-1 1 0 12000])
+title('Histogram');
 xlabel('n');
 
 
 
+saveas(1,'Lab2fig1.svg');
+saveas(2,'Lab2fig2.svg');
 
-
+saveas(3,'Lab2fig3.svg');
+saveas(4,'Lab2fig4.svg');
+saveas(5,'Lab2fig5.svg');
+saveas(6,'Lab2fig6.svg');
 
 
 
