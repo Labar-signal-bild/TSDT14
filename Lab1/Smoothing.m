@@ -24,7 +24,7 @@ elseif strcmp('boxcar',window)
     ACFSmooth = ACF.*Box';
     
 elseif strcmp('plot',window)
-    figure(9)
+    figure(11)
     subplot(2,2,1)
     plot(Ham);
     axis([1 n 0 1]);

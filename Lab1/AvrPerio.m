@@ -1,6 +1,6 @@
 %% Averaged Periodograms
 
-k = 125; %Antal segment som vi delar upp ACFen i
+k = 100; %Antal segment som vi delar upp ACFen i
 
 %
 % Calculating Periodograms
@@ -20,11 +20,10 @@ ACFAv2 = ifft(PSDAv2);
 % Calculating axis lengths
 %
 
-NmbrSamples = length(PSDAv1);
+nAv = length(PSDAv1);
+kAv = -nAv/2+1/2:nAv/2-1/2;
 
-thetaVector = 0:1/(NmbrSamples-1):1;
-
-sampleVector = -NmbrSamples/2+1/2:NmbrSamples/2-1/2;
+thetaAv = 0:1/(nAv-1):1;
 
 PSDAv1Max1=max(abs(PSDAv1));
 PSDAv2Max2=max(abs(PSDAv2));
@@ -32,39 +31,6 @@ PSDAv2Max2=max(abs(PSDAv2));
 ACFAv1Max1=max(abs(ACFAv1));
 ACFAv2Max2=max(abs(ACFAv2));
 
-%
-% Plottar
-%
+Ry1Av = 1/2*(abs((b1(1)+b1(2)*exp(-1i*2*pi*thetaAv))./(1+a1(2)*exp(-1i*2*pi*thetaAv))).^2);
+Ry2Av = 1/2*(thetaAv>=0)-1/2*(thetaAv>=thetac)+1/2*(thetaAv>=(1-thetac));
 
-figure(9)
-plot(thetaVector,abs(PSDAv1)); 
-axis([0 1 -PSDAv1Max1*1.5 PSDAv1Max1*1.5]); 
-title('PSD averaging first degree low pass filter'); 
-xlabel('theta');
-ylabel('Amplitud');
-
-figure(10)
-plot(thetaVector,abs(PSDAv2));
-axis([0 1 -PSDAv2Max2*1.5 PSDAv2Max2*1.5]);
-title('PSD averaging high degree low pass filter');
-xlabel('theta');
-ylabel('Amplitud');
-
-figure(11)
-plot(sampleVector,abs(ACFAv1)); 
-axis([-500 500 -ACFAv1Max1*1.5 ACFAv1Max1*1.5]); 
-title('ACF averaging first degree low pass filter'); 
-xlabel('k');
-ylabel('Amplitud');
-
-figure(12)
-plot(sampleVector,abs(ACFAv2));
-axis([-500 500 -ACFAv2Max2*1.5 ACFAv2Max2*1.5]);
-title('ACF averaging high degree low pass filter');
-xlabel('k');
-ylabel('Amplitud');
-
-saveas(9,'Lab1fig9.svg');
-saveas(10,'Lab1fig10.svg');
-saveas(11,'Lab1fig11.svg');
-saveas(12,'Lab1fig12.svg');

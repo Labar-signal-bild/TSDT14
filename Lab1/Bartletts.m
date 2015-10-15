@@ -1,9 +1,6 @@
 %% Bartletts k = 4000
 
-NmbrSamples = 20001; % Signal length
-kVectorH    = [-floor(NmbrSamples/2):floor(NmbrSamples/2)];
-thetaVectorH = [0:1/(NmbrSamples-1):1];
-x=1/2*randn(NmbrSamples,1); % White noise
+x=1/2*randn(nH,1); % White noise
 
 %
 % Filter koeficients
@@ -40,10 +37,8 @@ ACFMax2H=max(ACF2H);
 
 %% Bartletts k = 20
 
-NmbrSamples = 41; % Signal length
-kVectorL    = [-floor(NmbrSamples/2):floor(NmbrSamples/2)];
-thetaVectorL = [0:1/(NmbrSamples-1):1];
-x=1/2*randn(NmbrSamples,1); % White noise
+
+x=1/2*randn(nL,1); % White noise
 
 %
 % Filter koeficients

@@ -27,9 +27,3 @@ PSD2Ham = fft(ACF2Ham);
 PSD2Han = fft(ACF2Han);
 PSD2Bla = fft(ACF2Bla);
 %PSD2Box = fft(ACF2Box);
-
-%% Axises
-
-NmbrSamples = length(ACF1H);
-kVector     = [-NmbrSamples/2+1/2:NmbrSamples/2-1/2];
-thetaVector = [0:1/(NmbrSamples-1):1];
