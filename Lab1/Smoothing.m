@@ -1,6 +1,6 @@
 function ACFSmooth = Smoothing(ACF, window)
 n = length(ACF);
-Padding = zeros(n/4,1);
+Padding = zeros(floor(n/4),1);
 
 %
 % Windows
@@ -9,7 +9,7 @@ Padding = zeros(n/4,1);
 Ham = hamming(n);%[Padding; hamming(n/2);  Padding];
 Han = hanning(n);%[Padding; hanning(n/2);  Padding];
 Bla = blackman(n);%[Padding; blackman(n/2); Padding];
-Box = [Padding; boxcar(n/2);   Padding];
+Box = [Padding; boxcar(floor(n/2));   Padding];
 
 if strcmp('hamming',window)
     ACFSmooth = ACF.*Ham';
@@ -24,33 +24,26 @@ elseif strcmp('boxcar',window)
     ACFSmooth = ACF.*Box';
     
 elseif strcmp('plot',window)
-    figure(13)
+    figure(9)
+    subplot(2,2,1)
     plot(Ham);
     axis([1 n 0 1]);
-    title('ACF averaging high degree low pass filter');
-    xlabel('k');
-    ylabel('Amplitud');
+    title('Hamming window');
     
-    figure(14)
+    subplot(2,2,2)
     plot(Han);
     axis([1 n  0 1]);
-    title('ACF averaging high degree low pass filter');
-    xlabel('k');
-    ylabel('Amplitud');
+    title('Hanning window');
     
-    figure(15)
+    subplot(2,2,3)
     plot(Bla);
     axis([1 n 0 1]);
-    title('ACF averaging high degree low pass filter');
-    xlabel('k');
-    ylabel('Amplitud');
+    title('Blackman window');
     
-    figure(16)
+    subplot(2,2,4)
     plot(Box);
     axis([1 n 0 1]);
-    title('ACF averaging high degree low pass filter');
-    xlabel('k');
-    ylabel('Amplitud');
+    title('Rectangualr window');
     
     ACFSmooth = 0;
 else

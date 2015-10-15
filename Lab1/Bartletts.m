@@ -1,13 +1,8 @@
-%%
-
-cd      /edu/alepo020/skola/TSKS14/Rapport/bilder/Lab1
-addpath /edu/alepo020/skola/TSKS14/Lab1
-
 %% Bartletts k = 4000
 
 NmbrSamples = 20001; % Signal length
-kVector     = [-floor(NmbrSamples/2):floor(NmbrSamples/2)];
-thetaVector = [0:1/(NmbrSamples-1):1];
+kVectorH    = [-floor(NmbrSamples/2):floor(NmbrSamples/2)];
+thetaVectorH = [0:1/(NmbrSamples-1):1];
 x=1/2*randn(NmbrSamples,1); % White noise
 
 %
@@ -16,7 +11,6 @@ x=1/2*randn(NmbrSamples,1); % White noise
 
 thetac = 1/12;
 
-
 [b1,a1]=butter(1,2*thetac);
 [b2,a2]=butter(20,2*thetac);
 
@@ -24,15 +18,15 @@ thetac = 1/12;
 % Filtered signals
 %
 
-y1 = filter(b1,a1,x);
-y2 = filter(b2,a2,x);
+y1H = filter(b1,a1,x);
+y2H = filter(b2,a2,x);
 
 %
 % ACF estimate
 %
 
-ACF1H = ACF_estimate(y1);
-ACF2H = ACF_estimate(y2);
+ACF1H = ACF_estimate(y1H);
+ACF2H = ACF_estimate(y2H);
 
 ACFMax1H=max(ACF1H);
 ACFMax2H=max(ACF2H);
@@ -40,9 +34,6 @@ ACFMax2H=max(ACF2H);
 %
 % ACF estimate plots
 %
-
-kVectorH     = [-NmbrSamples/2+1/2:NmbrSamples/2-1/2];
-thetaVectorH = [0:1/(NmbrSamples-1):1];
 
 ACFMax1H=max(ACF1H);
 ACFMax2H=max(ACF2H);
@@ -68,15 +59,15 @@ thetac = 1/12;
 % Filtered signals
 %
 
-y1 = filter(b1,a1,x);
-y2 = filter(b2,a2,x);
+y1L = filter(b1,a1,x);
+y2L = filter(b2,a2,x);
 
 %
 % ACF estimate
 %
 
-ACF1L = ACF_estimate(y1);
-ACF2L = ACF_estimate(y2);
+ACF1L = ACF_estimate(y1L);
+ACF2L = ACF_estimate(y2L);
 
 ACFMax1L=max(ACF1L);
 ACFMax2L=max(ACF2L);
@@ -88,43 +79,17 @@ ACFMax2L=max(ACF2L);
 ACFMax1L=max(ACF1L);
 ACFMax2L=max(ACF2L);
 
-%%
+%% PSD
 
-% ACF H mot L
+PSD1H = fft(ACF1H);
+PSD2H = fft(ACF2H);
 
-figure(3)
-subplot(2,1,1);
-stem(kVectorL,ACF1L);
-axis([min(kVectorL) max(kVectorL) -ACFMax1L*0.5 ACFMax1L*1.5])
-title('ACF |k|<20');
-xlabel('k');
+PSDMax1H=max(abs(PSD1H));
+PSDMax2H=max(abs(PSD2H));
 
-subplot(2,1,2)
-plot(kVectorH,ACF2H);
-axis([min(kVectorH) max(kVectorH) -ACFMax2H*0.3 ACFMax2H*1.5])
-title('ACF |k|<10^4');
-xlabel('k');
+PSD1L = fft(ACF1L);
+PSD2L = fft(ACF2L);
 
-%%
-% PSD
+PSDMax1L=max(abs(PSD1L));
+PSDMax2L=max(abs(PSD2L));
 
-PSD1 = fft(ACF1);
-PSD2 = fft(ACF2);
-
-PSDMax1=max(abs(PSD1));
-PSDMax2=max(abs(PSD2));
-
-figure(7)
-plot(thetaVector,abs(PSD1));
-axis([min(thetaVector) max(thetaVector) -PSDMax1*1.5 PSDMax1*1.5])
-title('PSD estimate of first degre low pass filter');
-xlabel('theta');
-ylabel('Amplitud');
-
-
-figure(8)
-plot(thetaVector,abs(PSD2));
-axis([min(thetaVector) max(thetaVector) -PSDMax2*1.5 PSDMax2*1.5])
-title('PSD estimate of ideal low pass filter');
-xlabel('theta');
-ylabel('Amplitud');
