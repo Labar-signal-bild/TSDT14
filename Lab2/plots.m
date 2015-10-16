@@ -133,8 +133,8 @@ xlabel('\theta');
 
 %% 
 
-saveas(1,'Lab2fig1.svg');
-saveas(2,'Lab2fig2.svg');
-saveas(3,'Lab2fig3.svg');
+saveas(2,'Lab2fig7.svg');
+saveas(3,'Lab2fig8.svg');
+saveas(4,'Lab2fig9.svg');
 
 %close all

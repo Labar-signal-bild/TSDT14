@@ -25,7 +25,7 @@ kAvH = -nAvH/2+1/2:nAvH/2-1/2;
 thetaAvH = 0:1/(nAvH-1):1;
 
 nAvA = length(PSDAvA);
-kAvA = -nAv/2+1/2:nAvA/2-1/2;
+kAvA = -nAvA/2+1/2:nAvA/2-1/2;
 thetaAvA = 0:1/(nAvA-1):1;
 
 PSDAvMaxS = max(abs(PSDAvS));
