@@ -7,7 +7,7 @@ addpath /edu/alepo020/skola/TSKS14/Lab2
 %cd      /edu/annhj876/Skola/TSKS14/Rapport/bilder/Lab2
 %addpath /edu/annhj876/Skola/TSKS14/Lab2
 
-
+close all
 %% Lab 2 Teoretiska ACF & PSD
 
 theta = 0:0.001:1;

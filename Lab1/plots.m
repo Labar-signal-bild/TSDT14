@@ -70,7 +70,7 @@ xlabel('\theta');
 
 hold on
 subplot(2,1,1);
-plot(thetaH, Ry1H);
+plot(thetaH, Ry1);
 hold off
 
 subplot(2,1,2);
@@ -81,7 +81,7 @@ xlabel('\theta');
 
 hold on
 subplot(2,1,2);
-plot(thetaH, Ry1H);
+plot(thetaH, Ry1);
 hold off
 
 
@@ -94,7 +94,7 @@ xlabel('\theta');
 
 hold on
 subplot(2,1,1);
-plot(thetaH, Ry2H);
+plot(thetaH, Ry2);
 hold off
 
 subplot(2,1,2);
@@ -105,7 +105,7 @@ xlabel('\theta');
 
 hold on
 subplot(2,1,2);
-plot(thetaH, Ry2H);
+plot(thetaH, Ry2);
 hold off
 
 %% Averaged periods
@@ -119,7 +119,7 @@ xlabel('\theta');
 
 hold on
 subplot(2,1,1);
-plot(thetaH, Ry1H);
+plot(thetaH, Ry1);
 hold off
 
 subplot(2,1,2)
@@ -138,7 +138,7 @@ xlabel('\theta');
 
 hold on
 subplot(2,1,1);
-plot(thetaH, Ry2H);
+plot(thetaH, Ry2);
 hold off
 
 subplot(2,1,2)
@@ -165,7 +165,7 @@ xlabel('\theta');
 
 hold on
 subplot(2,1,1);
-plot(thetaH, Ry1H);
+plot(thetaH, Ry1);
 hold off
 
 subplot(2,1,2)
@@ -186,7 +186,7 @@ xlabel('\theta');
 
 hold on
 subplot(2,1,1);
-plot(thetaH, Ry2H);
+plot(thetaH, Ry2);
 hold off
 
 subplot(2,1,2)
@@ -195,23 +195,26 @@ axis([min(kH) max(kH) -ACFMax2*0.1 ACFMax2*1.5])
 title('ACF');
 xlabel('k');
 
+print -depsc -loose  ../test.eps
+
 Smoothing(ACF2Bla,'plot');
 
 
-%% 
+%% THIS IS WHERE THE ALMIGHTY PRINTING HAPPENS!
 
-saveas(1,'Lab1fig1.svg');
-saveas(2,'Lab1fig2.svg');
 
-saveas(3,'Lab1fig3.svg');
-saveas(4,'Lab1fig4.svg');
-saveas(5,'Lab1fig5.svg');
-saveas(6,'Lab1fig6.svg');
+print(1,'Lab1fig1.eps','-depsc','-loose');
+print(2,'Lab1fig2.eps','-depsc','-loose');
 
-saveas(7,'Lab1fig7.svg');
-saveas(8,'Lab1fig8.svg');
-saveas(9,'Lab1fig9.svg');
+print(3,'Lab1fig3.eps','-depsc','-loose');
+print(4,'Lab1fig4.eps','-depsc','-loose');
+print(5,'Lab1fig5.eps','-depsc','-loose');
+print(6,'Lab1fig6.eps','-depsc','-loose');
 
-saveas(10,'Lab1fig10.svg');
-saveas(11,'Lab1fig11.svg');
+print(7,'Lab1fig7.eps','-depsc','-loose');
+print(8,'Lab1fig8.eps','-depsc','-loose');
+print(9,'Lab1fig9.eps','-depsc','-loose');
+
+print(10,'Lab1fig10.eps','-depsc','-loose');
+print(11,'Lab1fig11.eps','-depsc','-loose');
 %close all

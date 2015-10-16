@@ -113,13 +113,13 @@ xlabel('n');
 
 
 
-saveas(1,'Lab2fig1.svg');
-saveas(2,'Lab2fig2.svg');
+print(1,'Lab2fig1.eps','-depsc','-loose');
+print(2,'Lab2fig2.eps','-depsc','-loose');
 
-saveas(3,'Lab2fig3.svg');
-saveas(4,'Lab2fig4.svg');
-saveas(5,'Lab2fig5.svg');
-saveas(6,'Lab2fig6.svg');
+print(3,'Lab2fig3.eps','-depsc','-loose');
+print(4,'Lab2fig4.eps','-depsc','-loose');
+print(5,'Lab2fig5.eps','-depsc','-loose');
+print(6,'Lab2fig6.eps','-depsc','-loose');
 
 
 
