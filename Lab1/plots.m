@@ -200,18 +200,18 @@ Smoothing(ACF2Bla,'plot');
 
 %% 
 
-saveas(1,'Lab1fig1.eps');
-saveas(2,'Lab1fig2.eps');
+saveas(1,'Lab1fig1.svg');
+saveas(2,'Lab1fig2.svg');
 
-saveas(3,'Lab1fig3.eps');
-saveas(4,'Lab1fig4.eps');
-saveas(5,'Lab1fig5.eps');
-saveas(6,'Lab1fig6.eps');
+saveas(3,'Lab1fig3.svg');
+saveas(4,'Lab1fig4.svg');
+saveas(5,'Lab1fig5.svg');
+saveas(6,'Lab1fig6.svg');
 
-saveas(7,'Lab1fig7.eps');
-saveas(8,'Lab1fig8.eps');
-saveas(9,'Lab1fig9.eps');
+saveas(7,'Lab1fig7.svg');
+saveas(8,'Lab1fig8.svg');
+saveas(9,'Lab1fig9.svg');
 
-saveas(10,'Lab1fig10.eps');
-saveas(11,'Lab1fig11.eps');
-close all
+saveas(10,'Lab1fig10.svg');
+saveas(11,'Lab1fig11.svg');
+%close all
