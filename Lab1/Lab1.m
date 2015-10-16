@@ -32,14 +32,11 @@ thetaL = [0:1/(nL-1):1];
 
 a = 0.78;
 
-Ry1H = 1/2*(abs((b1(1)+b1(2)*exp(-1i*2*pi*thetaH))./(1+a1(2)*exp(-1i*2*pi*thetaH))).^2);
+Ry1 = 1/2*(abs((b1(1)+b1(2)*exp(-1i*2*pi*thetaH))./(1+a1(2)*exp(-1i*2*pi*thetaH))).^2);
 ry1 = 1/2*(1-a)/(1+a).*a.^(abs(n));
 
-Ry2H = 1/2*(thetaH>=0)-1/2*(thetaH>=thetac)+1/2*(thetaH>=(1-thetac));
+Ry2 = 1/2*(thetaH>=0)-1/2*(thetaH>=thetac)+1/2*(thetaH>=(1-thetac));
 ry2 = 1/2*2*thetac*sinc(2*thetac*n);
-
-Ry1L = 1/2*(abs((b1(1)+b1(2)*exp(-1i*2*pi*thetaL))./(1+a1(2)*exp(-1i*2*pi*thetaL))).^2);
-Ry2L = 1/2*(thetaL>=0)-1/2*(thetaL>=thetac)+1/2*(thetaL>=(1-thetac));
 
 
 %% Bartletts 
