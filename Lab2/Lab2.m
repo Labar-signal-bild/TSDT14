@@ -1,9 +1,10 @@
-cd      /edu/annhj876/Skola/TSKS14/Rapport/bilder/Lab2
-addpath /edu/annhj876/Skola/TSKS14/Lab2
+%cd      /edu/annhj876/Skola/TSKS14/Rapport/bilder/Lab2
+%addpath /edu/annhj876/Skola/TSKS14/Lab2
 
+cd      /edu/alepo020/skola/TSKS14/Rapport/bilder/Lab2
+addpath /edu/alepo020/skola/TSKS14/Lab2
 
-
-theta = 0:0.01:1;
+theta = 0:0.001:1;
 theta0 = 0.15;
 ohm0 = pi/2;
 
@@ -26,7 +27,7 @@ RySquarer = N0^2*theta0*triangularPulse((theta-1)/(2*theta0)) + ...
 figure(1);
 plot(theta, RySquarer);
 title('PSD');
-xlabel('?');
+xlabel('\theta');
 %ylabel('Amplitude');
 
 diracwave = N0*theta0/(2*pi)*((theta>=0)-(theta>0)+(theta>=1));
@@ -43,7 +44,7 @@ RyHalfWave = diracwave + rectwave + triwave;
 figure(2);
 plot(theta, RyHalfWave);
 title('PSD');
-xlabel('?');
+xlabel('\theta');
 
 
 RyAM = N0/8*rectangularPulse((theta+ohm0/(2*pi))/(2*theta0)) + ...
@@ -55,7 +56,7 @@ RyAM = N0/8*rectangularPulse((theta+ohm0/(2*pi))/(2*theta0)) + ...
 figure(3);
 plot(theta, RyAM);
 title('PSD');
-xlabel('?');
+xlabel('\theta');
 
 
 %% Estimation
@@ -112,13 +113,13 @@ xlabel('n');
 
 
 
-saveas(1,'Lab2fig1.svg');
-saveas(2,'Lab2fig2.svg');
+print(1,'Lab2fig1.eps','-depsc','-loose');
+print(2,'Lab2fig2.eps','-depsc','-loose');
 
-saveas(3,'Lab2fig3.svg');
-saveas(4,'Lab2fig4.svg');
-saveas(5,'Lab2fig5.svg');
-saveas(6,'Lab2fig6.svg');
+print(3,'Lab2fig3.eps','-depsc','-loose');
+print(4,'Lab2fig4.eps','-depsc','-loose');
+print(5,'Lab2fig5.eps','-depsc','-loose');
+print(6,'Lab2fig6.eps','-depsc','-loose');
 
 
 

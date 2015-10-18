@@ -133,8 +133,9 @@ xlabel('\theta');
 
 %% 
 
-saveas(1,'Lab2fig1.svg');
-saveas(2,'Lab2fig2.svg');
-saveas(3,'Lab2fig3.svg');
 
-%close all
+print(2,'Lab2fig7.eps','-depsc','-loose');
+print(3,'Lab2fig8.eps','-depsc','-loose');
+print(4,'Lab2fig9.eps','-depsc','-loose');
+
+close all

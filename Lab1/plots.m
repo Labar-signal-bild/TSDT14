@@ -2,7 +2,7 @@
 
 figure(1);
 subplot(2,1,1)
-plot(theta, Ry1);
+plot(thetaH, Ry1);
 axis([0 1 0 0.55])
 title('PSD');
 xlabel('\theta');
@@ -15,7 +15,7 @@ xlabel('k');
  
 figure(2)
 subplot(2,1,1)
-plot(theta,Ry2);
+plot(thetaH,Ry2);
 axis([0 1 0 0.55])
 title('PSD');
 xlabel('\theta');
@@ -70,7 +70,7 @@ xlabel('\theta');
 
 hold on
 subplot(2,1,1);
-plot(thetaH, Ry1H);
+plot(thetaH, Ry1);
 hold off
 
 subplot(2,1,2);
@@ -81,7 +81,7 @@ xlabel('\theta');
 
 hold on
 subplot(2,1,2);
-plot(thetaH, Ry1H);
+plot(thetaH, Ry1);
 hold off
 
 
@@ -94,7 +94,7 @@ xlabel('\theta');
 
 hold on
 subplot(2,1,1);
-plot(thetaH, Ry2H);
+plot(thetaH, Ry2);
 hold off
 
 subplot(2,1,2);
@@ -105,7 +105,7 @@ xlabel('\theta');
 
 hold on
 subplot(2,1,2);
-plot(thetaH, Ry2H);
+plot(thetaH, Ry2);
 hold off
 
 %% Averaged periods
@@ -119,26 +119,27 @@ xlabel('\theta');
 
 hold on
 subplot(2,1,1);
-plot(thetaH, Ry1H);
+plot(thetaH, Ry1);
 hold off
 
 subplot(2,1,2)
+plot(kAv,abs(ACFAv1)); 
+axis([min(kAv) max(kAv) -ACFAv1Max1*0.1 ACFAv1Max1*1.5]); 
+title('ACF'); 
+xlabel('k');
+
+
+figure(8)
+subplot(2,1,1)
 plot(thetaAv,abs(PSDAv2));
 axis([0 1 0 PSDAv2Max2*1.5]);
 title('PSD');
 xlabel('\theta');
 
 hold on
-subplot(2,1,2);
-plot(thetaH, Ry2H);
+subplot(2,1,1);
+plot(thetaH, Ry2);
 hold off
-
-figure(8)
-subplot(2,1,1)
-plot(kAv,abs(ACFAv1)); 
-axis([min(kAv) max(kAv) -ACFAv1Max1*0.1 ACFAv1Max1*1.5]); 
-title('ACF'); 
-xlabel('k');
 
 subplot(2,1,2)
 plot(kAv,abs(ACFAv2));
@@ -157,59 +158,63 @@ PSDMax2=max(abs(PSD2Bla));
 
 figure(9)
 subplot(2,1,1)
-plot(kVectorH,ACF1Bla);
-axis([min(kVectorH) max(kVectorH) -ACFMax1*0.1 ACFMax1*1.5])
-title('ACF');
-xlabel('k');
-
-
-subplot(2,1,2)
-plot(thetaVectorH,abs(PSD1Bla));
-axis([min(thetaVectorH) max(thetaVectorH) 0 PSDMax1*1.5])
+plot(thetaH,abs(PSD1Bla));
+axis([min(thetaH) max(thetaH) 0 PSDMax1*1.5])
 title('PSD');
 xlabel('\theta');
 
 hold on
-subplot(2,1,2);
-plot(thetaH, Ry1H);
+subplot(2,1,1);
+plot(thetaH, Ry1);
 hold off
+
+subplot(2,1,2)
+plot(kH,ACF1Bla);
+axis([min(kH) max(kH) -ACFMax1*0.1 ACFMax1*1.5])
+title('ACF');
+xlabel('k');
+
+
 
 
 figure(10)
 subplot(2,1,1)
-plot(kVectorH,ACF2Bla);
-axis([min(kVectorH) max(kVectorH) -ACFMax2*0.1 ACFMax2*1.5])
-title('ACF');
-xlabel('k');
-
-subplot(2,1,2)
-plot(thetaVectorH,abs(PSD2Bla));
-axis([min(thetaVectorH) max(thetaVectorH) 0 PSDMax2*1.5])
+plot(thetaH,abs(PSD2Bla));
+axis([min(thetaH) max(thetaH) 0 PSDMax2*1.5])
 title('PSD');
 xlabel('\theta');
 
 hold on
-subplot(2,1,2);
-plot(thetaH, Ry2H);
+subplot(2,1,1);
+plot(thetaH, Ry2);
 hold off
+
+subplot(2,1,2)
+plot(kH,ACF2Bla);
+axis([min(kH) max(kH) -ACFMax2*0.1 ACFMax2*1.5])
+title('ACF');
+xlabel('k');
+
+print -depsc -loose  ../test.eps
 
 Smoothing(ACF2Bla,'plot');
 
 
-%% 
+%% THIS IS WHERE THE ALMIGHTY PRINTING HAPPENS!
 
-saveas(1,'Lab1fig1.svg');
-saveas(2,'Lab1fig2.svg');
 
-saveas(3,'Lab1fig3.svg');
-saveas(4,'Lab1fig4.svg');
-saveas(5,'Lab1fig5.svg');
-saveas(6,'Lab1fig6.svg');
+print(1,'Lab1fig1.eps','-depsc','-loose');
+print(2,'Lab1fig2.eps','-depsc','-loose');
 
-saveas(7,'Lab1fig7.svg');
-saveas(8,'Lab1fig8.svg');
-saveas(9,'Lab1fig9.svg');
+print(3,'Lab1fig3.eps','-depsc','-loose');
+print(4,'Lab1fig4.eps','-depsc','-loose');
+print(5,'Lab1fig5.eps','-depsc','-loose');
+print(6,'Lab1fig6.eps','-depsc','-loose');
 
-saveas(10,'Lab1fig10.svg');
-saveas(11,'Lab1fig11.svg');
-close all
+print(7,'Lab1fig7.eps','-depsc','-loose');
+print(8,'Lab1fig8.eps','-depsc','-loose');
+print(9,'Lab1fig9.eps','-depsc','-loose');
+
+print(10,'Lab1fig10.eps','-depsc','-loose');
+print(11,'Lab1fig11.eps','-depsc','-loose');
+%close all
