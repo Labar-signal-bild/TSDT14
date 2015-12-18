@@ -1,6 +1,6 @@
 %% Bartletts k = 4000
 
-x=1/2*randn(nH,1); % White noise
+x=1/sqrt(2)*randn(nH,1); % White noise
 
 %
 % Filter koeficients
@@ -8,7 +8,7 @@ x=1/2*randn(nH,1); % White noise
 
 thetac = 1/12;
 
-[b1,a1]=butter(1,2*thetac);
+
 [b2,a2]=butter(20,2*thetac);
 
 %

@@ -16,7 +16,7 @@ addpath /edu/alepo020/skola/TSKS14/Lab1
 
 % We have a cutoff frequenci of pi/12.
 %theta = 0:0.001:10;
-n = -100:2:100;
+n = -100:1:100;
 thetac = 1/12;
 
 nH = 20001;
@@ -28,11 +28,14 @@ kL = -floor(nL/2):floor(nL/2);
 thetaH = [0:1/(nH-1):1];
 thetaL = [0:1/(nL-1):1];
 
-[b1,a1]=butter(1,2*thetac);
-
 a = 0.78;
+b1 = 1-a;
 
-Ry1 = 1/2*(abs((b1(1)+b1(2)*exp(-1i*2*pi*thetaH))./(1+a1(2)*exp(-1i*2*pi*thetaH))).^2);
+a1 = [1; -a];
+
+
+
+Ry1 = 1/2*(abs(b1(1)./(1+a1(2)*exp(-1i*2*pi*thetaH))).^2);
 ry1 = 1/2*(1-a)/(1+a).*a.^(abs(n));
 
 Ry2 = 1/2*(thetaH>=0)-1/2*(thetaH>=thetac)+1/2*(thetaH>=(1-thetac));
