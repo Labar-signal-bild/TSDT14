@@ -1,8 +1,8 @@
 %% Averaged Periodograms
 
-kAvS = 72; %Antal segment som vi delar upp ACFen i
-kAvH = 120;
-kAvA = 100;
+kAvS = 120; %Antal segment som vi delar upp ACFen i
+kAvH = 160;
+kAvA = 130;
 %
 % Calculating Periodograms
 %

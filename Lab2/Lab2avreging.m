@@ -1,8 +1,8 @@
 %% Lab2 TSDT14
 
 
-cd      /edu/alepo020/skola/TSKS14/Rapport/bilder/Lab2
-addpath /edu/alepo020/skola/TSKS14/Lab2
+%cd      /edu/alepo020/skola/TSKS14/Rapport/bilder/Lab2
+%addpath /edu/alepo020/skola/TSKS14/Lab2
 
 %cd      /edu/annhj876/Skola/TSKS14/Rapport/bilder/Lab2
 %addpath /edu/annhj876/Skola/TSKS14/Lab2
@@ -40,22 +40,22 @@ RyA = N0/8*rectangularPulse((theta+ohm0/(2*pi))/(2*theta0)) + ...
 %high k
 
 N1 = 20001; % Signal length
-w1 = 1/2*randn(N1,1); % White noise
+w1 = 1/sqrt(2)*randn(N1,1); % White noise
 [b1,a1]=butter(20,2*theta0); % Create butterworth filter parameters
 x1 = filter(b1,a1,w1); %Filter our noise throuh the filter. x is our in signal
 k1 = [-floor(N1/2):floor(N1/2)];
 
-theta1 = 0:1/(N1-1):1;
+theta1 = 0:1/((2*N1-1)-1):1;
 
 %low k
 
 N2 = 21; % Signal length
-w2 = 1/2*randn(N2,1); % White noise
+w2 = 1/sqrt(2)*randn(N2,1); % White noise
 [b2,a2]=butter(20,2*theta0); % Create butterworth filter parameters
 x2 = filter(b2,a2,w2); %Filter our noise throuh the filter. x is our in signal
 k2 = [-floor(N2/2):floor(N2/2)];
 
-theta2 = 0:1/(N2-1):1;
+theta2 = 0:1/((2*N2-1)-1):1;
 
 %high k
 
