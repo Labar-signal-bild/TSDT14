@@ -61,8 +61,8 @@ y2L = filter(b2,a2,x);
 % ACF estimate
 %
 
-ACF1L = ACF_estimate(y1L);
-ACF2L = ACF_estimate(y2L);
+[ACF1L kL] = ACF_estimate(y1L);
+[ACF2L kH] = ACF_estimate(y2L);
 
 ACFMax1L=max(ACF1L);
 ACFMax2L=max(ACF2L);

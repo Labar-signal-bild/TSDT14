@@ -1,9 +1,9 @@
 function [ACF kA] = ACF_estimate( y )
 %Bartleys ACF estimet
-
+N = length(y);
 ACF = zeros(1,2*N-1);
 
-kA = -floor(nH/2):0.5:floor(nH/2);
+kA = -floor(N/2):0.5:floor(N/2);
 
 for k = -N+1:N-1
     for n = 1:(N-abs(k))
