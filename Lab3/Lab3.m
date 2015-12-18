@@ -1,5 +1,5 @@
-%cd      /edu/annhj876/Skola/TSKS14/Rapport/bilder/Lab3
-%addpath /edu/annhj876/Skola/TSKS14/Lab3
+cd      /edu/annhj876/Skola/TSKS14/Rapport/bilder/Lab3
+addpath /edu/annhj876/Skola/TSKS14/Lab3
 
 
 N0 = 1;
@@ -10,8 +10,8 @@ ohm0 = pi/2;
 
 NmbrSamples = 20001; % Signal length
 n = -100:2:100;
-w = 1/2*randn(NmbrSamples,1); % White noise
-[b2,a2]=butter(20,2*theta0); % Create butterworth filter parameters
+w = 1/sqrt(2)*randn(NmbrSamples,1); % White noise, scaled with 1/sqrt(2) since R0 = 1/2
+[b2,a2]=butter(20,2*theta0); % Create butterworth filter parameters, high order
 x = filter(b2,a2,w); %Filter our noise throuh the filter. x is our in signal
 kVectorH    = [-floor(NmbrSamples/2):floor(NmbrSamples/2)];
 
