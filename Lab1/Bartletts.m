@@ -8,7 +8,6 @@ x=1/sqrt(2)*randn(nH,1); % White noise
 
 thetac = 1/12;
 
-
 [b2,a2]=butter(20,2*thetac);
 
 %
@@ -22,8 +21,8 @@ y2H = filter(b2,a2,x);
 % ACF estimate
 %
 
-ACF1H = ACF_estimate(y1H);
-ACF2H = ACF_estimate(y2H);
+[ACF1H kH] = ACF_estimate(y1H);
+[ACF2H kH] = ACF_estimate(y2H);
 
 ACFMax1H=max(ACF1H);
 ACFMax2H=max(ACF2H);
@@ -35,10 +34,10 @@ ACFMax2H=max(ACF2H);
 ACFMax1H=max(ACF1H);
 ACFMax2H=max(ACF2H);
 
-%% Bartletts k = 20
+%% Bartletts k = 40
 
 
-x=1/2*randn(nL,1); % White noise
+load('x.mat') % White noise
 
 %
 % Filter koeficients
@@ -47,8 +46,8 @@ x=1/2*randn(nL,1); % White noise
 thetac = 1/12;
 
 
-[b1,a1]=butter(1,2*thetac);
-[b2,a2]=butter(20,2*thetac);
+
+
 
 %
 % Filtered signals
@@ -62,7 +61,7 @@ y2L = filter(b2,a2,x);
 %
 
 [ACF1L kL] = ACF_estimate(y1L);
-[ACF2L kH] = ACF_estimate(y2L);
+[ACF2L kL] = ACF_estimate(y2L);
 
 ACFMax1L=max(ACF1L);
 ACFMax2L=max(ACF2L);
