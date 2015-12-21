@@ -4,9 +4,9 @@
 % ACF estimate
 %
 
-ACF1S = ACF_estimate(yS1);
-ACF1H = ACF_estimate(yH1);
-ACF1A = ACF_estimate(yA1);
+[ACF1S k1S] = ACF_estimate(yS1);
+[ACF1H k1H] = ACF_estimate(yH1);
+[ACF1A k1A] = ACF_estimate(yA1);
 
 ACFMax1S=max(ACF1S);
 ACFMax1H=max(ACF1H);
@@ -17,9 +17,9 @@ ACFMax1A=max(ACF1A);
 
 
 
-ACF2S = ACF_estimate(yS2);
-ACF2H = ACF_estimate(yH2);
-ACF2A = ACF_estimate(yA2);
+[ACF2S k2S] = ACF_estimate(yS2);
+[ACF2H k2H] = ACF_estimate(yH2);
+[ACF2A k2H] = ACF_estimate(yA2);
 
 ACFMax2S=max(ACF2S);
 ACFMax2H=max(ACF2H);
